@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malware Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    
+
+    <style>
+        body {
+            background-color: #121212;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #00ff00;
+            width: auto;
+            border-radius: 10px;
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: auto;
+            margin-bottom: 30px;
+            max-width: auto;
+            margin: 0 auto; /
+        }
+        .card-header {
+            background-color: #1b1b1b;
+            color: #00ff00;
+            padding: 15px 20px;
+            border-bottom: 1px solid #00ff00;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .x{
+            background-color: #333333;
+            width: 100%; /* Changed width to 100% for responsiveness */
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: unset;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        .table {
+            color: #00ff00;
+            background-color: #1e1e1e;
+            overflow: visible; 
+        }
+        .table th,
+        .table td {
+            border: none;
+            word-break: break-all;
+        }
+        .table th {
+            color: #00ff00;
+            border-bottom: 2px solid #00ff00;
+        }
+        .table tbody tr:nth-child(odd) {
+            background-color: #292929;
+        }
+        .text-danger {
+            color: #ff0000;
+        }
+        .text-success {
+            color: #00ff00;
+        }
+        .btn {
+            border-radius: 20px;
+        }
+        .btn-hacker {
+            background-color: #000000;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .btn-hacker:hover {
+            background-color: #00ff00;
+            color: #000000;
+        }
+        .ascii-art {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            color: #00ff00;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .score-card {
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            
+        }
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            
+        }
+        .score-label {
+            font-size: 16px;
+            color: #666666;
+        }
+        .binary-fall {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .binary-fall span {
+            position: absolute;
+            top: -100%;
+            color: #00ff00;
+            font-size: 12px;
+            animation: fall linear infinite;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        @keyframes fall {
+            0% {
+                top: -100%;
+            }
+            100% {
+                top: 100%;
+            }
+        }
+        .high-severity {
+    color: #ff0000;
+}
+
+.medium-severity {
+    color: #ffa500;
+}
+
+.low-severity {
+    color: #00ff00;
+}
+
+#threatScoreChart {
+    margin: 0 auto; /* Center horizontally */
+    display: block; /* Ensure it's a block element */
+}
+.row{
+    margin: 0 auto; /* Center horizontally */
+}
+
+/* Add this CSS inside <style> tag */
+/* For smaller screens */
+@media (max-width: 768px) {
+    html {
+        width: 100%; /* Adjust width to full width on smaller screens */
+    }
+    .table {
+        overflow-x: auto; /* Enable horizontal scrolling for small screens */
+
+    }
+    tbody{
+        white-space: nowrap;
+        overflow-x: auto;
+    }
+
+    .table th,
+    .table td {
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    .card-header {
+        flex-direction: column; /* Stack header items vertically on smaller screens */
+        align-items: flex-start; /* Align header items to the start on smaller screens */
+    }
+    .btn-hacker {
+        margin-top: 10px; /* Adjust margin for smaller screens */
+    }
+    @media (max-width: 768px) {
+  h1, h2, h3, tr, td, td {
+    font-size: auto;
+  }
+  p {
+    font-size: auto;
+  }
+}
+}
+.header {
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.hamburger {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-item {
+  margin-left: 5rem;
+}
+
+.nav-link {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #475569;
+}
+
+.nav-link:hover {
+  color: #482ff7;
+}
+
+.nav-logo {
+  font-size: 2.1rem;
+  font-weight: 500;
+  color: #482ff7;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 992px) {
+ .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+ .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #222831;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+  }
+ .nav-menu.active {
+    left: 0;
+  }
+}
+
+/* >>>>>>>>>>>>>>>>>>>> */
+
+/* Style for the overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Style for the popup */
+.popup {
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 300px;
+    animation: slideIn 0.3s ease-in-out;
+}
+
+.popup p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #00FF00; /* Green text color */
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for a terminal-like appearance */
+}
+
+.popup button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.popup button:hover {
+    background-color: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); }
+    to { transform: translateY(0); }
+}
+
+/* Style for detail labels and values */
+.detail-label,
+.detail-value {
+    padding: 8px;
+    border: 1px solid #00ff00;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #00ff00;
+    border-top-left-radius: 5px; /* Rounded corners */
+    border-bottom-left-radius: 5px; /* Rounded corners */
+}
+
+.detail-value {
+    color: #00ff00;
+    border-top-right-radius: 5px; /* Rounded corners */
+    border-bottom-right-radius: 5px; /* Rounded corners */
+}
+
+/* Style for "ab" container to mimic table */
+.ab {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    border-radius: 5px; /* Rounded corners */
+    overflow: hidden; /* Hide overflowing content */
+    margin-bottom: 20px;
+}
+
+/* Style for columns to mimic table cells */
+.ab .row {
+    display: flex;
+}
+
+.ab .col-md-6 {
+    flex: 1;
+    width: 100%;
+    display: inline-block;
+    
+}
+
+
+/* Adjustments for responsiveness */
+@media (max-width: 768px) {
+    .ab .row {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+    }
+    .ab .col-md-12 {
+        width: 100%; /* Take full width on smaller screens */
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="binary-fall" id="binaryFall"></div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"> > MetaDefender</h5>
+                <div class="d-flex flex-column flex-sm-row"> <!-- Added flex properties for responsiveness -->
+                    <a href="#" id="downloadReportBtn" onclick="downloadReport()" class="btn btn-hacker">
+                        <i class="fas fa-download"></i> Download Report
+                    </a>
+                    <a href="/" id="backToDashboardBtn" class="btn btn-hacker ml-sm-2 mt-2 mt-sm-0"><i class="fas fa-chevron-circle-left"></i> Back to Dashboard</a> <!-- Added margin and adjusted for small screens -->
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="x col-md-3">
+                        <div class="score-label">Threat Chart</div>
+                        <br>
+                        <canvas id="threatScoreChart" width="200" height="200"></canvas>
+                    </div>
+                    <div class="y col-md-9">
+                        <div class="score-card">
+                            <div class="score-label">Threat Score</div>
+                            <div class="score">{{ result.positives }} / {{ result.total }}</div>
+                            
+                            <div class="score-label">Severity:
+                                {% if result.positives / result.total > 0.5 %}
+                                    <span style="color: #ff0000">High</span>
+                                {% elif result.positives / result.total > 0.2 %}
+                                    <span style="color: #ffa500">Medium</span>
+                                {% else %}
+                                    <span style="color: #00ff00">Low</span>
+                                {% endif %}
+                            </div>
+                            <br>
+                            
+                            <div class="score-label"><b>SHA1 :</b><h6 style="color:#00ff00;"> {{ result.sha1 }}</h6></div>
+                            <div class="score-label"><b>MD5 :</b><h6 style="color:#00ff00;"> {{ result.md5 }}</h6></div>
+                            
+                            <div class="score-label"><b>Detected By :</b><h6 style="color:#00ff00;">{{ result.positives }} out of {{ result.total }} scanners</h6> </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                
+                <h5 style="font-size: large; letter-spacing: 5px;" align="center" ><b> GENERAL DETAILS </b></h5>
+                <br>
+                <div class="ab">
+                        <div class="col-md-12">
+                            <div class="detail-label">Last Modification Date :  <div class="detail-value ">{{ result.scan_date }}</div></div>
+                            <br>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="detail-label">Positives :  <div class="detail-value ">{{ result.positives }}</div></div>
+                            <br>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="detail-label">Total :  <div class="detail-value ">{{ result.total }}</div></div>
+                            <br>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="detail-label">SHA256 :  <div class="detail-value ">{{ result.sha256 }}</div></div>
+                            <br>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="detail-label">Detected by :  <div class="detail-value ">{{ result.positives }} out of {{ result.total }} scanners</div></div>
+                            <br>
+                        </div>
+
+                </div>
+               <br>
+                <br>
+                <h5 align="center" style="font-size: large; letter-spacing: 5px;"><b>SCAN DETAILS</b></h5>
+                <br>
+                <div>
+                <div class="ab">
+                    {% for antivirus, scan_result in result.scans.items() %}
+                        <div class="col-md-12">
+                            <div class="detail-label">{{ antivirus }} :  <div class="detail-value {% if 'malicious' in scan_result.result|lower %}text-danger{% else %}text-success{% endif %}">{{ scan_result.result }}</div></div>
+                            <br>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+            </div>
+        </div>
+    </div>
+
+   
+    
+    <script>
+        
+        function downloadReport() {
+            // Hide the buttons before creating the downloadable content
+            document.getElementById('downloadReportBtn').style.display = 'none';
+            document.getElementById('backToDashboardBtn').style.display = 'none';
+
+            // Create the downloadable content
+            const element = document.createElement('a');
+            const file = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
+            element.href = URL.createObjectURL(file);
+            element.download = '{{ result.md5 }}_malware_details_report.html';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+
+            // Show the buttons again after the download is triggered
+            document.getElementById('downloadReportBtn').style.display = 'inline-block';
+            document.getElementById('backToDashboardBtn').style.display = 'inline-block';
+        }
+
+        function createBinaryFall() {
+            const binaryFall = document.getElementById('binaryFall');
+            const binaryCharacters = '01';
+            const numberOfCharacters = 100;
+
+            for (let i = 0; i < numberOfCharacters; i++) {
+                const span = document.createElement('span');
+                span.textContent = binaryCharacters[Math.floor(Math.random() * binaryCharacters.length)];
+                span.style.left = Math.random() * 100 + 'vw';
+                span.style.animationDuration = Math.random() * 3 + 2 + 's';
+                span.style.animationDelay = Math.random() * 2 + 's';
+                binaryFall.appendChild(span);
+            }
+        }
+
+        function startBinaryFall() {
+            createBinaryFall();
+            setInterval(createBinaryFall, 5000); // Add more binary characters every 5 seconds
+        }
+
+        window.onload = startBinaryFall;
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-3d"></script>
+
+<script>
+    // Get the canvas element
+const threatScoreCanvas = document.getElementById('threatScoreChart');
+const ctx = threatScoreCanvas.getContext('2d');
+
+// Extract the data for the pie chart
+const threatScoreData = {
+    labels: ['+ve', '-ve'],
+    datasets: [{
+        label: 'Score',
+        data: [{{ result.total - result.positives }},{{ result.positives }} ], // Assuming 'positives' represents positive findings and 'total' represents the total number of scans
+        backgroundColor: ['#00ff00', '#ff0000'], // Red for positives, green for total
+        borderWidth: 0
+    }]
+};
+
+// Render the pie chart
+new Chart(ctx, {
+    type: 'doughnut' ,
+    data: threatScoreData,
+    options: {
+        responsive: false, // Ensure the chart has a fixed size
+        maintainAspectRatio: false, // Prevent the chart from changing aspect ratio
+        legend: {
+            position: 'top' // Adjust legend position if needed
+            
+        }
+        
+    }
+});
+/* JavaScript */
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".nav-menu");
+
+hamburger.addEventListener("click", mobileMenu);
+
+function mobileMenu() {
+  hamburger.classList.toggle("active");
+  navMenu.classList.toggle("active");
+}
+</script>
+
+<!-- Popup -->
+<div class="overlay" id="overlay">
+    <div class="popup">
+        <p>Note : This website is best viewed on desktop. Switch to desktop view for optimal experience if you are using the Mobile .</p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+</div>
+
+<script>
+// Function to close the popup
+function closePopup() {
+    document.getElementById('overlay').style.display = 'none';
+}
+
+// Function to display the popup
+function showPopup() {
+    document.getElementById('overlay').style.display = 'flex';
+}
+
+// Improved mobile detection
+function isMobile() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+
+    // List of mobile user agents
+    var mobileUserAgents = /android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+    var isMobileUserAgent = mobileUserAgents.test(userAgent);
+
+    // Additional check for screen width
+    var mobileScreenSize = window.innerWidth <= 768;
+
+    return isMobileUserAgent && isTouchDevice && mobileScreenSize;
+}
+
+// Check if the device is a mobile device and display the popup
+if (isMobile()) {
+    showPopup();
+}
+</script>
+    
+</body>
+</html>

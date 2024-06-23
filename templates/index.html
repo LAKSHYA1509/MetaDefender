@@ -1,49 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- THE FRONTEND DESIGN IS MADE CUSTOM WITH THE ORIGNAL WEBSITE LOOK OF THE CYBERENT^3 FRONTEND LOOK KEEPING THE NAV DESIGN LOOK ... I HAVE TRIED TO KEEP THE WEBSITE BACKEND UNTOUCHED FOR NOW-->
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetaDefender</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> C Y B E R E N T 3 </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.png">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/hamburgers.min.css">
+    <link rel="stylesheet" href="assets/css/gijgo.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/animated-headline.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #000;
-            color: #0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background-color: #111;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 400px;
-            text-align: center;
-        }
-        h1 {
-            color: #00ff00;
-            margin-bottom: 20px;
+        .splide__slide img {
+            width: 150px;
+            height: auto;
         }
         label {
             font-weight: bold;
             display: block;
-            margin-bottom: 5px;
-            color: #0f0;
+            margin-bottom: 1px;
+            gap: 10px;
+            color: rgb(249, 252, 249);
         }
         input[type="text"], input[type="file"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
             border-radius: 5px;
-            border: 1px solid #0f0;
+            border: 1px solid rgb(24, 28, 24);
             box-sizing: border-box;
             background-color: #333;
-            color: #0f0;
+            color: rgb(255, 255, 255);
         }
         button[type="submit"] {
             background-color: #007bff;
@@ -55,7 +60,7 @@
             transition: background-color 0.3s;
         }
         button[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #ec621d;
         }
         .file-upload-icon {
             margin-right: 5px;
@@ -73,7 +78,7 @@
         }
         .binary-fall span {
             position: absolute;
-            top: -100%;
+            top: -60%;
             color: #00ff00;
             font-size: 12px;
             animation: fall linear infinite;
@@ -89,24 +94,199 @@
         }
     </style>
 </head>
+
 <body>
-    <div class="binary-fall" id="binaryFall"></div>
-    <div class="container">
-    <pre>
-<h1 style="font-family: 'Courier New', Courier, monospace;"> > MetaDefender </h1>
-<p>A Complete Malware Anlysis Tool</p>
-    </pre>
-        
-        <form action="/malware_details" method="post" enctype="multipart/form-data">
-            <label for="hash">File Hash:</label>
-            <input type="text" id="hash" name="hash">
-            <br><br>
-            <label for="file">or Upload File:</label>
-            
-            <input type="file" id="file" name="file" >
-            <button type="submit"><i class="fas fa-search file-upload-icon"></i>Get Details</button>
-        </form>
+    <!-- ? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <!-- <img src="assets/img/logo/loder.png" alt=""> -->
+
+                    <h6>M.E.T.A X <sup>3</sup></h6>
+
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Preloader Start -->
+    <header>
+        <!--? Header Start -->
+        <div class="header-area header-transparent">
+            <div class="main-header header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2 col-md-1">
+                            <a href="index.html">
+
+
+                                <div class="logo">
+                                    <img src="./favicon.png" style="width:12%;"> M.E.T.A X<sup>3</sup>
+                                </div>
+
+                            </a>
+
+                        </div>
+                        <div class="col-xl-9 col-lg-10">
+                            <div class="main-menu black-menu menu-bg-white d-none d-lg-block">
+                                <div class="hamburger hamburger--collapse">
+                                    <div class="hamburger-box">
+                                        <div class="hamburger-inner"></div>
+                                    </div>
+                                </div>
+                                <nav class="hamburger-menu">
+                                    <ul id="navigation">
+                                        <li><a href="https://www.cyberentcube.org/">Home</a></li>
+
+                                        <li><a href="https://www.cyberentcube.org/about.html">About</a></li>
+                                        <li><a href="https://www.cyberentcube.org/services.html">Services</a></li>
+                                        <li><a href="https://www.cyberentcube.org/project.html">Project</a></li>
+                                        <li>
+                                            <a href="https://www.cyberentcube.org/blog.html">Blog</a>
+                                            <ul class="submenu">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="Malware_Analysis_Phase_Report.html">Phase Report</a></li>
+                                                <li><a href="malware_analysis_test_case_report.html">Test Case Report</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="./Career.html">Career</a></li>
+                                        <li><a href="contact.html">contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    <!-- header end -->
+    <main>
+
+        <!--? slider-area start -->
+        <div class="slider-area">
+            <div class="slider-full-active owl-carousel custom-dots">
+                <div class="slide-full slider-height d-flex align-items-center" style="background-image: url(assets/img/cyber.gif);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-8 col-md-7 col-sm-8">
+                                <div class="slide-full-content">
+                                    <span>Are Your Files Safe ?</span>
+                                    <h1> Safety Stands First</h1>
+                                    <p>Meta Defender tool now available, Just paste file link or drop one</p>
+
+                    <form action="/malware_details" method="post" enctype="multipart/form-data">
+                        <label for="hash">File Hash:</label>
+                            <input type="text" id="hash" name="hash">
+                                <br><br>
+                            <label for="file">or Upload File:</label>
+    
+                        <input type="file" id="file" name="file" >
+                <button type="submit"><i class="fas fa-search file-upload-icon"></i>Get Details</button>
+                    </form>
+                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <!-- <div class="slide-full d-flex slider-height align-items-center" style="background-image: url(assets/img/cyber.gif);">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-8 col-md-7 col-sm-8">
+                                <div class="slide-full-content">
+                                    <span>Complete Security Solution </span>
+                                    <h1>We Believe in<br> Our Experts</h1>
+                                    <p>We create a lasting impression <br>through our Services.</p>
+                                    <a class="btn" href="contact.html">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+        <!-- slider-area end -->
+
+    <!-- JS here -->
+
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/animated.headline.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Date Picker -->
+    <script src="./assets/js/gijgo.min.js"></script>
+    <!-- Nice-select, sticky -->
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.sticky.js"></script>
+
+    <!-- counter , waypoint,Hover Direction -->
+    <script src="./assets/js/jquery.counterup.min.js"></script>
+    <script src="./assets/js/waypoints.min.js"></script>
+    <script src="./assets/js/jquery.countdown.min.js"></script>
+    <script src="./assets/js/hover-direction-snake.min.js"></script>
+
+    <!-- contact js -->
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+
+    <!--tools-->
+
+
+    <script>
+        $('.vendor-carousel').owlCarousel({
+            loop: true,
+            margin: 45,
+            dots: false,
+            loop: true,
+            autoplay: true,
+            smartSpeed: 1000,
+            responsive: {
+                0: {
+                    items: 2
+                },
+                576: {
+                    items: 4
+                },
+                768: {
+                    items: 6
+                },
+                992: {
+                    items: 8
+                }
+            }
+        });
+    </script>
+
+
 
     <script>
         function downloadReport() {
@@ -141,5 +321,7 @@
 
         window.onload = startBinaryFall;
     </script>
+
 </body>
+
 </html>
